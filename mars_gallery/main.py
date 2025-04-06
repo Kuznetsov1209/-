@@ -1,9 +1,9 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+main = Flask(__name__)
 
 
-@app.route('/')
+@main.route('/')
 def mars_gallery():
     images = [
         {"filename": "mars1.jpg", "title": "Маск хочет туда перебраться"},
@@ -15,4 +15,4 @@ def mars_gallery():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main.run(debug=True)
