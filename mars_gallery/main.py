@@ -1,10 +1,15 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
-main = Flask(__name__)
+app = Flask(__name__)
 
 
-@main.route('/')
-def mars_gallery():
+@app.route('/')
+def index():
+    return redirect(url_for('carousel'))  # Перенаправление на /carousel
+
+
+@app.route('/carousel')
+def carousel():
     images = [
         {"filename": "mars1.jpg", "title": "Маск хочет туда перебраться"},
         {"filename": "mars2.jpg", "title": "Маск хочет туда перебраться"},
@@ -15,4 +20,4 @@ def mars_gallery():
 
 
 if __name__ == '__main__':
-    main.run(debug=True)
+    app.run(host='127.0.0.1', port=8080, debug=True)
