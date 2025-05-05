@@ -24,3 +24,19 @@ h1 {
     color: #d9534f;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
+
+.upload-form {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #c12e2a;
+}

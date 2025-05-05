@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Марсианские пейзажи</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-4">Пейзажи Марса</h1>
+        <p class="text-center lead mb-5">И на Марсе будут яблони цвести!</p>
 
-        <div id="marsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Форма загрузки новых изображений -->
+        <div class="upload-form card mb-5 p-4">
+            <h3 class="mb-3">Добавить новый пейзаж</h3>
+            <form method="POST" action="{{ url_for('index') }}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input class="form-control" type="file" name="photo" required>
+                    <div class="form-text">Выберите файл изображения (JPG, PNG, GIF)</div>
+                </div>
+                <button type="submit" class="btn btn-danger">Загрузить</button>
+            </form>
+        </div>
+
+        <!-- Карусель с изображениями -->
+        <div id="marsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 {% for image in images %}
                 <button type="button" data-bs-target="#marsCarousel"
@@ -23,7 +37,9 @@
             <div class="carousel-inner">
                 {% for image in images %}
                 <div class="carousel-item {% if loop.first %}active{% endif %}">
-                    <img src="/static/images/{{ image.filename }}" class="d-block w-100" alt="{{ image.title }}">
+                    <img src="{{ url_for('static', filename='images/' + image.filename) }}"
+                         class="d-block w-100"
+                         alt="{{ image.title }}">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>{{ image.title }}</h5>
                         <p>{{ image.description }}</p>
@@ -34,13 +50,12 @@
 
             <button class="carousel-control-prev" type="button" data-bs-target="#marsCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#marsCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
             </button>
-        </div>
-
-        <div class="text-center mt-4">
         </div>
     </div>
 
